@@ -96,6 +96,55 @@
   </div>
 
 <script>
+  const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+  console.log(checkboxes)
+  let lastChecked = null;
+  let checkThis = false;
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('click', function (e) {
+      console.log('current', this, 'last', lastChecked)
+      if (e.shiftKey && this.checked && lastChecked) {
+        //iterate all checkboxes until we find current or last
+        checkboxes.forEach(checkbox => {
+          if (checkbox === this || checkbox === lastChecked) {
+            checkThis = !checkThis; //flip the check to true or false
+          };
+          if (checkThis) {
+            checkbox.checked = true;
+            console.log(checkbox)
+          }
+        })
+      }
+      lastChecked = this;
+  })
+});
+
+  // document.addEventListener('click', (e) => {
+  //   console.log(e)
+  //   if (e.shiftKey && e.target.nodeName === 'INPUT') { //shift is being held, so let's fill in check boxes
+  //   //start with the index of the item that was clicked, then when a second is clicked, iterate the array between the two indexes
+  //   for (const item of checkboxes) {
+  //     console.log(item)
+  //   }
+  //   }
+  // })
+  
+  // let selectMany = false; // <-- Well, I just found e.shiftKey to determine is shift is being held
+  // document.addEventListener('keydown', (e) => {
+  //   if (e.keyCode === 16) selectMany = true;
+  //   console.log('shift is down:', selectMany)
+  // })
+  // document.addEventListener('keyup', (e) => {
+  //   if (e.keyCode === 16) selectMany = false;
+  //   console.log('shift is down:', selectMany)
+  // })
+  // if (selectMany) { //if this is true, shift is being held down
+  //   //set a variable for first item that stays the same, and second item that can change
+  //   let firstItem;
+  //   let secondItem;
+
+  // }
+  //I need to listen not for a general click, but for a shift to be pressed down, this will set "select multiple" to be true
 </script>
 </body>
 </html>
