@@ -6,6 +6,7 @@ const progressBar = player.querySelector('.progress__filled');
 const toggle = player.querySelector('.toggle');
 const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player__slider');
+const full = player.querySelector('.fullscreen');
 
 // build functions
 function spacePlay(e) {
@@ -42,6 +43,13 @@ function scrub(e) {
   video.currentTime = scrubTime;
 };
 
+function expand() {
+  console.log('expanding');
+  //make the size of the player the size of the screen, or literally go to max screen?
+  if (video.requestFullscreen) video.requestFullscreen();
+  if (video.webkitRequestFullScreen) video.webkitRequestFullScreen();
+}
+
 // hook up event listeners
 document.addEventListener('keydown',spacePlay)
 
@@ -61,3 +69,5 @@ progress.addEventListener('click', scrub)
 progress.addEventListener('mousemove', (e) => mousedown && scrub(e))
 progress.addEventListener('mousedown', () => mousedown = true);
 progress.addEventListener('mouseup', () => mousedown = false);
+
+full.addEventListener('click', expand)
